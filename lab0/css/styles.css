@@ -1,0 +1,28 @@
+#message,
+h1,
+p,
+label {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#message {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+input {
+  padding: 0.5em;
+  border-radius: 999em 0em 0em 999em;
+  margin-right: 0;
+}
+
+#submit {
+  padding: 0.5em;
+  border-radius: 0em 999em 999em 0em;
+  margin-left: 0;
+  background-color: lightgreen;
+}
+
+#submit:disabled {
+  background-color: lightgray;
+}
