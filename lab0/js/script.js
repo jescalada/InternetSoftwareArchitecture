@@ -1,5 +1,5 @@
-// Import the localization
 import { user } from '../lang/messages/en/user.js';
+import { constants } from './constants.js';
 
 let arrayButtons = [];
 let currentOrder = 0;
@@ -22,6 +22,7 @@ function Button(color, width, height, top, left, order) {
   this.btn.style.position = "absolute";
   this.btn.textContent = order;
   this.btn.onclick = checkOrder.bind(this);
+  this.btn.classList.add("game-button");
 
   this.setLocation = function (top, left) {
     this.btn.style.top = top;
@@ -128,7 +129,7 @@ function go() {
  * Starts the game. Sets a message after the interval is finished
  */
 function startGame() {
-  initialDelay(arrayButtons.length * 1000);
+  initialDelay(arrayButtons.length * constants.VARIABLE_INTERVAL);
 }
 
 /**
@@ -154,9 +155,19 @@ function intervalDelay() {
       clearInterval(interval);
       setSuccess(user["lab0"]["StartMessage"]);
       hideNumbers();
+      enableGameButtons();
     }
     updateButtons();
-  }, 2000);
+  }, );
+}
+
+/**
+ * Enables all buttons to be clicked
+ */
+function enableGameButtons() {
+  arrayButtons.forEach(function (button) {
+    button.btn.disabled = false;
+  });
 }
 
 /**
@@ -169,7 +180,7 @@ function validateInput() {
     setError("Input cannot be empty");
   } else if (parseInt(input) != input) {
     setError("Input must be a number");
-  } else if (input < 3 || input > 7) {
+  } else if (input < constants.MIN_BUTTONS || input > constants.MAX_BUTTONS) {
     setError("Input must be between 3 and 7");
   } else {
     setSuccess("Game started!");
@@ -200,25 +211,33 @@ function hideNumbers() {
  * Checks if the order of the button pressed is correct
  */
 function checkOrder() {
-  console.log('This.order: ' + this.order);
-  console.log('Current order: ' + currentOrder)
-  console.log('Array length: ' + arrayButtons.length)
   if (this.order == currentOrder) {
     currentOrder++;
-    // Hide the button once it is clicked
-    this.btn.style.display = "none";
+    onSuccessfulClick(this);
     if (currentOrder == arrayButtons.length) {
       setSuccess("You won!");
-      showNumbers();
-      showButtons();
-      document.getElementById('submit').disabled = false;
+      onGameEnd();
     }
   } else {
+    this.btn.classList.add("failure");
     setError("You lost!");
-    showNumbers();
-    showButtons();
-    document.getElementById('submit').disabled = false;
+    onGameEnd();
   }
+}
+
+function onGameEnd() {
+  showNumbers();
+  showButtons();
+  document.getElementById('submit').disabled = false;
+}
+
+/**
+ * Sets the button to be green and displays the order
+ * @param {Button} button the button to be set
+ */
+function onSuccessfulClick(button) {
+  button.btn.classList.add("success");
+  button.btn.textContent = button.order;
 }
 
 /**
@@ -245,12 +264,13 @@ function generateInitialButtons(quantity) {
   for (let i = 0; i < quantity; i++) {
     let button = new Button(
       getRandomColor(),
-      '10em',
-      '5em',
-      '15em',
-       `${i * 10.2}em`,
+      constants.DEFAULT_BUTTON_WIDTH,
+      constants.DEFAULT_BUTTON_HEIGHT,
+      constants.BUTTON_Y_POSITION,
+       `${i * constants.BUTTON_X_SPACING}em`,
       i
     );
+    button.btn.disabled = true;
     arrayButtons.push(button);
     console.log(arrayButtons)
   }
