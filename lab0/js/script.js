@@ -45,7 +45,22 @@ function reset() {
  * Resets the HTML of the page
  */
 function setup() {
+  let title = user["lab0"]["PageTitle"] + " - " + user["StudentName"] + " - " + user["StudentID"];
+  document.title = title;
+  document.getElementById('header').innerHTML = title;
+  document.getElementById('label').innerHTML = user["lab0"]["Label"];
+  document.getElementById('submit').innerHTML = user["lab0"]["SubmitButtonText"];
   document.getElementById('submit').addEventListener('click', go);
+  addStringFormatting();
+}
+
+/**
+ * Extends the String class to add allow formatting with %s
+ */
+function addStringFormatting() {
+  String.prototype.format = function() {
+    return [...arguments].reduce((p,c) => p.replace(/%s/,c), this);
+  };
 }
 
 /**
@@ -158,15 +173,24 @@ function intervalDelay() {
       enableGameButtons();
     }
     updateButtons();
-  }, );
+  }, constants.RANDOMIZATION_INTERVAL);
 }
 
 /**
- * Enables all buttons to be clicked
+ * Enables all game buttons
  */
 function enableGameButtons() {
   arrayButtons.forEach(function (button) {
     button.btn.disabled = false;
+  });
+}
+
+/**
+ * Disables all game buttons
+ */
+function disableGameButtons() {
+  arrayButtons.forEach(function (button) {
+    button.btn.disabled = true;
   });
 }
 
@@ -177,13 +201,13 @@ function enableGameButtons() {
 function validateInput() { 
   let input = document.getElementById('input').value;
   if (input == "") {
-    setError("Input cannot be empty");
+    setError(user["lab0"]["EmptyInputErrorMessage"]);
   } else if (parseInt(input) != input) {
-    setError("Input must be a number");
+    setError(user["lab0"]["NonNumberInputErrorMessage"]);
   } else if (input < constants.MIN_BUTTONS || input > constants.MAX_BUTTONS) {
-    setError("Input must be between 3 and 7");
+    setError(user["lab0"]["OutOfBoundsInputErrorMessage"].format(constants.MIN_BUTTONS, constants.MAX_BUTTONS));
   } else {
-    setSuccess("Game started!");
+    setSuccess(user["lab0"]["StartMessage"]);
     return true;
   }
   return false;
@@ -215,19 +239,23 @@ function checkOrder() {
     currentOrder++;
     onSuccessfulClick(this);
     if (currentOrder == arrayButtons.length) {
-      setSuccess("You won!");
+      setSuccess(user["lab0"]["WinMessage"]);
       onGameEnd();
     }
   } else {
     this.btn.classList.add("failure");
-    setError("You lost!");
+    setError(user["lab0"]["LoseMessage"]);
     onGameEnd();
   }
 }
 
+/**
+ * Shows the numbers on the buttons, disables them and enables the Go button
+ */
 function onGameEnd() {
   showNumbers();
   showButtons();
+  disableGameButtons();
   document.getElementById('submit').disabled = false;
 }
 
