@@ -102,3 +102,46 @@ function intervalDelay() {
     updateButtons();
   }, 2000);
 }
+
+/**
+ * Validates input by checking if it is non-empty and an integer between 3 and 7
+ * @return {boolean} true if input is valid, false otherwise
+ */
+function validateInput() { 
+  let input = document.getElementById('input').value;
+  if (input == "") {
+    setError("Input cannot be empty");
+  } else if (parseInt(input) != input) {
+    setError("Input must be a number");
+  } else if (input < 3 || input > 7) {
+    setError("Input must be between 3 and 7");
+  } else {
+    setSuccess("Game started!");
+    return true;
+  }
+  return false;
+}
+
+function hideNumbers() {
+  arrayButtons.forEach(function (button) {
+    button.btn.textContent = "";
+  });
+}
+
+function checkOrder() {
+  console.log('This.order: ' + this.order);
+  console.log('Current order: ' + currentOrder)
+  console.log('Array length: ' + arrayButtons.length)
+  if (this.order == currentOrder) {
+    currentOrder++;
+    // Hide the button once it is clicked
+    this.btn.style.display = "none";
+    if (currentOrder == arrayButtons.length) {
+      setSuccess("You won!");
+      reset();
+    }
+  } else {
+    setError("You lost!");
+    reset();
+  }
+}
