@@ -75,3 +75,30 @@ function go() {
     startGame();
   }
 }
+
+/**
+ * Starts the game. Sets a message after the interval is finished
+ */
+function startGame() {
+  initialDelay();
+}
+
+function initialDelay() {
+  setTimeout(function() {
+    updateButtons();
+    intervalDelay();
+  }, arrayButtons.length * 1000);
+}
+
+function intervalDelay() {
+  let counter = 1;
+  interval = setInterval(function () {
+    counter++;
+    if (counter >= arrayButtons.length) {
+      clearInterval(interval);
+      setSuccess("Guess the order of the buttons!");
+      hideNumbers();
+    }
+    updateButtons();
+  }, 2000);
+}
