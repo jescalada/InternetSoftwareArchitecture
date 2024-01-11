@@ -145,3 +145,52 @@ function checkOrder() {
     reset();
   }
 }
+
+/**
+ * Sets the message to be displayed on the page, with green font color
+ */
+function setSuccess(text) {
+  document.getElementById('message').innerHTML = text;
+  document.getElementById('message').style.color = "green";
+}
+
+/**
+ * Sets the message to be displayed on the page, with red font color
+ */
+function setError(text) { 
+  document.getElementById('message').innerHTML = text;
+  document.getElementById('message').style.color = "red";
+}
+
+/**
+ * Generates the initial buttons and stores them in an array
+ */ 
+function generateInitialButtons(quantity) {
+  arrayButtons = [];
+  for (let i = 0; i < quantity; i++) {
+    let button = new Button(
+      getRandomColor(),
+      '10em',
+      '5em',
+      '15em',
+       `${i * 10.2}em`,
+      i
+    );
+    arrayButtons.push(button);
+    console.log(arrayButtons)
+  }
+}
+
+/**
+ * Generates a random color in hexadecimal format
+ * @return {string} color in hexadecimal format
+ */
+function getRandomColor() {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++)
+    color += letters[Math.floor(Math.random() * 16)];
+  return color;
+}
+
+reset();
