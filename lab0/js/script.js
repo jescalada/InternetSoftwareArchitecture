@@ -1,3 +1,9 @@
+// Import the localization
+import { user } from '../lang/messages/en/user.js';
+
+let arrayButtons = [];
+let currentOrder = 0;
+
 /**
  * Creates a button with the given parameters
  * @param {*} color the background color of the button
@@ -31,8 +37,14 @@ function Button(color, width, height, top, left, order) {
 function reset() {
   arrayButtons = [];
   currentOrder = 0;
-  interval = null;
   document.getElementById('container').innerHTML = "";
+}
+
+/**
+ * Resets the HTML of the page
+ */
+function setup() {
+  document.getElementById('submit').addEventListener('click', go);
 }
 
 /**
@@ -136,11 +148,11 @@ function initialDelay(delay) {
  */
 function intervalDelay() {
   let counter = 1;
-  interval = setInterval(function () {
+  let interval = setInterval(function () {
     counter++;
     if (counter >= arrayButtons.length) {
       clearInterval(interval);
-      setSuccess("Guess the order of the buttons!");
+      setSuccess(user["lab0"]["StartMessage"]);
       hideNumbers();
     }
     updateButtons();
@@ -255,3 +267,5 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   return color;
 }
+
+setup();
