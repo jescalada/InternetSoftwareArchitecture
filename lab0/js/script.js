@@ -1,3 +1,12 @@
+/**
+ * Creates a button with the given parameters
+ * @param {*} color the background color of the button
+ * @param {*} width the width of the button
+ * @param {*} height the height of the button
+ * @param {*} top the top position of the button
+ * @param {*} left the left position of the button
+ * @param {*} order the order of the button
+ */
 function Button(color, width, height, top, left, order) {
   this.order = order;
   this.btn = document.createElement('button');
@@ -16,25 +25,30 @@ function Button(color, width, height, top, left, order) {
   this.setLocation(top, left);
 }
 
+/**
+ * Resets the game
+ */
 function reset() {
   arrayButtons = [];
   currentOrder = 0;
   interval = null;
   document.getElementById('container').innerHTML = "";
-  document.getElementById('submit').disabled = false;
 }
 
+/**
+ * Updates the position of all buttons on the page
+ */
 function updateButtons() {
   for (let i = 0; i < arrayButtons.length; i++) {
     randomizeButtonPosition(i);
   }
-  showButtons();
+  appendButtons();
 }
 
-function showButtons() {
-  /**
-   * Displays all buttons on the page
-   */
+/**
+ * Appends all buttons to the page
+ */
+function appendButtons() {
   let container = document.getElementById('container');
   container.innerHTML = "";
   arrayButtons.forEach(function (button) {
@@ -42,6 +56,19 @@ function showButtons() {
   });
 }
 
+/**
+ * Shows all buttons on the page
+ */
+function showButtons() {
+  arrayButtons.forEach(function (button) {
+    button.btn.style.display = "block";
+  });
+}
+
+/**
+ * Randomizes the position of the button at the given index
+ * @param {number} index 
+ */
 function randomizeButtonPosition(index) {
   let windowWidth = getCurrentWindowWidth();
   let windowHeight = getCurrentWindowHeight();
@@ -55,10 +82,18 @@ function randomizeButtonPosition(index) {
   );
 }
 
+/**
+ * Gets the current width of the window
+ * @return {number} the current width of the window
+ */
 function getCurrentWindowWidth() {
   return window.innerWidth;
 }
 
+/**
+ * Gets the current height of the window
+ * @returns {number} the current height of the window
+ */
 function getCurrentWindowHeight() {
   return window.innerHeight;
 }
@@ -67,11 +102,12 @@ function getCurrentWindowHeight() {
  * Submits the input to start the game
  */
 function go() {
+  reset();
   let valid = validateInput();
   if (valid) {
     document.getElementById('submit').disabled = true;
     generateInitialButtons(document.getElementById('input').value);
-    showButtons();
+    appendButtons();
     startGame();
   }
 }
@@ -80,16 +116,24 @@ function go() {
  * Starts the game. Sets a message after the interval is finished
  */
 function startGame() {
-  initialDelay();
+  initialDelay(arrayButtons.length * 1000);
 }
 
-function initialDelay() {
+/**
+ * Sets a delay before the interval starts
+ * @param {number} delay the delay in milliseconds
+ */
+function initialDelay(delay) {
   setTimeout(function() {
     updateButtons();
     intervalDelay();
-  }, arrayButtons.length * 1000);
+  }, delay);
 }
 
+/**
+ * Sets the interval that randomizes the position of the buttons
+ * and sets a message after the interval is finished
+ */
 function intervalDelay() {
   let counter = 1;
   interval = setInterval(function () {
@@ -122,12 +166,27 @@ function validateInput() {
   return false;
 }
 
+/**
+ * Shows the numbers on the buttons
+ */
+function showNumbers() {
+  arrayButtons.forEach(function (button) {
+    button.btn.textContent = button.order;
+  });
+}
+
+/**
+ * Hides the numbers on the buttons
+ */
 function hideNumbers() {
   arrayButtons.forEach(function (button) {
     button.btn.textContent = "";
   });
 }
 
+/**
+ * Checks if the order of the button pressed is correct
+ */
 function checkOrder() {
   console.log('This.order: ' + this.order);
   console.log('Current order: ' + currentOrder)
@@ -138,11 +197,15 @@ function checkOrder() {
     this.btn.style.display = "none";
     if (currentOrder == arrayButtons.length) {
       setSuccess("You won!");
-      reset();
+      showNumbers();
+      showButtons();
+      document.getElementById('submit').disabled = false;
     }
   } else {
     setError("You lost!");
-    reset();
+    showNumbers();
+    showButtons();
+    document.getElementById('submit').disabled = false;
   }
 }
 
@@ -192,5 +255,3 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   return color;
 }
-
-reset();
