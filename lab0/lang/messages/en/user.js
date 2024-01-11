@@ -2,7 +2,6 @@
 // This file is used by the app to display the strings in the correct language
 
 export const user = {
-
   // General
   "StudentName": "Juan Escalada",
   "StudentID": "A01285535",
@@ -15,7 +14,9 @@ export const user = {
     "SubmitButtonText": "Go!",
     "StartMessage": "Guess the order of the buttons!",
     "WinMessage": "Excellent memory!",
-    "LoseMessage": "Wrong order!"
+    "LoseMessage": "Wrong order!",
+    "EmptyInputErrorMessage": "Input cannot be empty",
+    "NonNumberInputErrorMessage": "Input must be a number",
+    "OutOfBoundsInputErrorMessage": "Input must be between %s and %s"
   }
-
 }
