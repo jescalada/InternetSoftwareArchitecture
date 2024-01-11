@@ -266,6 +266,7 @@ function onGameEnd() {
 function onSuccessfulClick(button) {
   button.btn.classList.add("success");
   button.btn.textContent = button.order;
+  button.btn.disabled = true;
 }
 
 /**

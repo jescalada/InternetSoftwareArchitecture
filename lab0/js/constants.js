@@ -7,4 +7,4 @@ export const constants = {
   "DEFAULT_BUTTON_WIDTH": "10em",
   "BUTTON_Y_POSITION": "15em",
   "BUTTON_X_SPACING": 10.2
-} 
+}
