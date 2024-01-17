@@ -36,3 +36,34 @@ function addNoteDetails(noteDiv, note) {
   noteDiv.appendChild(title);
   noteDiv.appendChild(content);
 }
+
+function removeNote(noteDiv, note) {
+  removeNoteFromList(noteDiv);
+  removeNoteFromLocalStorage(note.id);
+}
+
+function removeNoteFromList(noteDiv) {
+  let list = document.getElementById('notes');
+  list.removeChild(noteDiv);
+}
+
+function addNoteToLocalStorage(note) {
+  let notes = [];
+  if (localStorage.getItem('notes')) {
+    notes = JSON.parse(localStorage.getItem('notes'));
+  }
+  notes.push(note);
+  localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+function removeNoteFromLocalStorage(noteId) {
+  let notes = JSON.parse(localStorage.getItem('notes'));
+  notes = notes.filter(note => note.id != noteId);
+  localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+function setup() {
+  document.getElementById('submit').addEventListener('click', addNote);
+}
+
+setup();
