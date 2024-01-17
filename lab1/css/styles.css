@@ -1,0 +1,82 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #f3f3ff;
+}
+
+.note {
+    border: 2px solid #aaa;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: lightgoldenrodyellow;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px #ccc;
+    max-width: 25rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.note h2 {
+    margin: 0;
+    padding: 1rem;
+    padding-bottom: 0rem;
+}
+
+.note p {
+    margin: 0;
+    padding: 1rem;
+    line-height: 1.5;
+}
+
+button {
+    padding: 0.5em;
+    border-radius: 1rem;
+    font-size: large;
+    font-weight: bold;
+    background-color: lightgreen;
+    color: darkgreen;
+    border: 2px solid darkgreen;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+label {
+    font-weight: bold;;
+}
+
+input, textarea {
+    padding: 0.5em;
+    border-radius: 1rem;
+    font-size: large;
+    font-weight: bold;
+    background-color: lightgoldenrodyellow;
+    font-family: 'Courier New', Courier, monospace;
+    border: 2px solid #aaa;
+    margin-bottom: 0.5rem;
+    margin-top: 0.2rem;
+}
+
+label {
+    margin: 1rem;
+}
+
+#create-post-container {
+    padding: 1rem;
+    border: 2px solid #aaa;
+    background-color: white;
+    max-width: 15rem;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
+#create-post-container h2 {
+    margin: 0;
+    margin-bottom: 0.5rem;
+    padding: 0;
+    text-align: center;
+}
+
+#add {
+    margin-left: 1rem;
+}
+
+#submit {
+    margin-top: 0.2rem;
+}
