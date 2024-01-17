@@ -31,10 +31,11 @@ function addNoteDetails(noteDiv, note) {
   let removeButton = document.createElement('button');
   removeButton.textContent = "Remove";
   removeButton.classList.add('remove');
-  removeButton.addEventListener('click', removeNoteFromList.bind(this, noteDiv, note));
+  removeButton.addEventListener('click', removeNote.bind(this, noteDiv, note));
 
   noteDiv.appendChild(title);
   noteDiv.appendChild(content);
+  noteDiv.appendChild(removeButton);
 }
 
 function removeNote(noteDiv, note) {

@@ -6,7 +6,7 @@ body {
 .note {
     border: 2px solid #aaa;
     padding: 10px;
-    margin-bottom: 10px;
+    margin: 0.5rem;
     background: lightgoldenrodyellow;
     border-radius: 1rem;
     box-shadow: 0 0 10px #ccc;
@@ -24,6 +24,7 @@ body {
     margin: 0;
     padding: 1rem;
     line-height: 1.5;
+    word-wrap: break-word;
 }
 
 button {
@@ -39,6 +40,18 @@ button {
 
 button:hover {
     background-color: darkgreen;
+    color: white;
+}
+
+button.remove {
+    background-color: lightcoral;
+    color: darkred;
+    border: 2px solid darkred;
+    margin: 0rem 0rem 0.5rem 1rem;
+}
+
+button.remove:hover {
+    background-color: darkred;
     color: white;
 }
 
@@ -85,4 +98,17 @@ label {
 
 #submit {
     margin-top: 0.2rem;
+}
+
+#page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem;
+}
+
+#notes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
