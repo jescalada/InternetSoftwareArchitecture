@@ -37,6 +37,11 @@ button {
     font-family: 'Courier New', Courier, monospace;
 }
 
+button:hover {
+    background-color: darkgreen;
+    color: white;
+}
+
 label {
     font-weight: bold;;
 }
@@ -62,6 +67,7 @@ label {
     border: 2px solid #aaa;
     background-color: white;
     max-width: 15rem;
+    box-shadow: 0 0 10px #ccc;
     border-radius: 1rem;
     margin: 1rem;
 }

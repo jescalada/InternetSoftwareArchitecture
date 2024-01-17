@@ -70,7 +70,15 @@ function hideCreateContainer() {
   document.getElementById('create-post-container').style.display = 'none';
 }
 
+function loadNotesFromLocalStorage() {
+  let notes = JSON.parse(localStorage.getItem('notes'));
+  if (notes) {
+    notes.forEach(note => addNoteToList(note));
+  }
+}
+
 function setup() {
+  loadNotesFromLocalStorage();
   document.getElementById('submit').addEventListener('click', addNote);
   document.getElementById('add').addEventListener('click', showCreateContainer);
   hideCreateContainer();
