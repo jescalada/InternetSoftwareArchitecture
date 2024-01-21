@@ -1,6 +1,11 @@
-import { Note } from "./note.js";
-// import { user } from "../lang/messages/en/user.js";
+// Utility functions for adding and removing notes
 
+import { Note } from "./note.js";
+
+/**
+ * Adds a note to the list of notes
+ * @param {*} callback a callback function to call after adding the note
+ */
 export function addNote(callback) {
   let title = document.getElementById('title').value;
   let content = document.getElementById('content').value;
@@ -12,11 +17,19 @@ export function addNote(callback) {
   callback();
 }
 
+/**
+ * Removes a note from the list of notes
+ * @param {*} noteDiv the div containing the note
+ * @param {*} note the note to remove
+ */
 export function removeNote(noteDiv, note) {
   removeNoteFromList(noteDiv);
   removeNoteFromLocalStorage(note.id);
 }
 
+/**
+ * Loads the notes from local storage into the list of notes
+ */
 export function loadNotesFromLocalStorage() {
   let list = document.getElementById('notes');
   list.innerHTML = '';
@@ -25,6 +38,11 @@ export function loadNotesFromLocalStorage() {
     notes.forEach(note => addNoteToList(note));
   }
 }
+
+/**
+ * Adds a note to the list of notes
+ * @param {*} note the note to add
+ */
 function addNoteToList(note) {
   let list = document.getElementById('notes');
   let noteDiv = document.createElement('div');
@@ -34,6 +52,11 @@ function addNoteToList(note) {
   list.appendChild(noteDiv);
 }
 
+/**
+ * Adds the note details to the note div
+ * @param {*} noteDiv the div containing the note
+ * @param {*} note the note to add
+ */
 function addNoteDetails(noteDiv, note) {
   let title = document.createElement('h2');
   title.textContent = note.title;
@@ -54,11 +77,19 @@ function addNoteDetails(noteDiv, note) {
   noteDiv.appendChild(removeButton);
 }
 
+/**
+ * Removes a note from the list of notes
+ * @param {*} noteDiv the div containing the note
+ */
 function removeNoteFromList(noteDiv) {
   let list = document.getElementById('notes');
   list.removeChild(noteDiv);
 }
 
+/**
+ * Adds a note to local storage
+ * @param {*} note the note to add
+ */
 function addNoteToLocalStorage(note) {
   let notes = [];
   if (localStorage.getItem('notes')) {
@@ -68,6 +99,10 @@ function addNoteToLocalStorage(note) {
   localStorage.setItem('notes', JSON.stringify(notes));
 }
 
+/**
+ * Removes a note from local storage
+ * @param {*} noteId the id of the note to remove
+ */
 function removeNoteFromLocalStorage(noteId) {
   let notes = JSON.parse(localStorage.getItem('notes'));
   notes = notes.filter(note => note.id != noteId);

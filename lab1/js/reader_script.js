@@ -1,6 +1,9 @@
 import { loadNotesFromLocalStorage } from './utils/note_utils.js';
 import { user } from '../lang/messages/en/user.js';
 
+/**
+ * Sets up the page.
+ */
 function setup() {
   refresh();
   addLocalization();

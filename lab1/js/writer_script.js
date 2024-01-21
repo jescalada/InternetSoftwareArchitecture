@@ -1,15 +1,23 @@
 import { addNote, loadNotesFromLocalStorage } from "./utils/note_utils.js";
 import { user } from "../lang/messages/en/user.js";
 
-
+/**
+ * Shows the create note container.
+ */
 function showCreateContainer() {
   document.getElementById('create-post-container').style.display = 'block';
 }
 
+/**
+ * Hides the create note container.
+ */
 function hideCreateContainer() {
   document.getElementById('create-post-container').style.display = 'none';
 }
 
+/**
+ * Toggles the create note container.
+ */
 function toggleCreateContainer() {
   let container = document.getElementById('create-post-container');
   if (container.style.display === 'none') {
@@ -19,6 +27,9 @@ function toggleCreateContainer() {
   }
 }
 
+/**
+ * Sets up the page.
+ */
 function setup() {
   document.getElementById('submit').addEventListener('click', addNote.bind(this, hideCreateContainer));
   document.getElementById('add').addEventListener('click', toggleCreateContainer);
@@ -46,6 +57,9 @@ function showLastUpdated() {
   lastUpdated.textContent = `Last Updated: ${time}`;
 }
 
+/**
+ * Set the content for the page based on the language.
+ */
 function addLocalization() {
   let title = user["lab1"]["PageTitle"] + " - " + user["StudentName"] + " - " + user["StudentID"];
   document.title = title;
