@@ -11,7 +11,20 @@ export function addNote(callback) {
   callback();
 }
 
-export function addNoteToList(note) {
+export function removeNote(noteDiv, note) {
+  removeNoteFromList(noteDiv);
+  removeNoteFromLocalStorage(note.id);
+}
+
+export function loadNotesFromLocalStorage() {
+  let list = document.getElementById('notes');
+  list.innerHTML = '';
+  let notes = JSON.parse(localStorage.getItem('notes'));
+  if (notes) {
+    notes.forEach(note => addNoteToList(note));
+  }
+}
+function addNoteToList(note) {
   let list = document.getElementById('notes');
   let noteDiv = document.createElement('div');
   noteDiv.classList.add('note');
@@ -20,16 +33,7 @@ export function addNoteToList(note) {
   list.appendChild(noteDiv);
 }
 
-function addNoteToLocalStorage(note) {
-  let notes = [];
-  if (localStorage.getItem('notes')) {
-    notes = JSON.parse(localStorage.getItem('notes'));
-  }
-  notes.push(note);
-  localStorage.setItem('notes', JSON.stringify(notes));
-}
-
-export function addNoteDetails(noteDiv, note) {
+function addNoteDetails(noteDiv, note) {
   let title = document.createElement('h2');
   title.textContent = note.title;
  
@@ -46,24 +50,18 @@ export function addNoteDetails(noteDiv, note) {
   noteDiv.appendChild(removeButton);
 }
 
-export function removeNote(noteDiv, note) {
-  removeNoteFromList(noteDiv);
-  removeNoteFromLocalStorage(note.id);
-}
-
 function removeNoteFromList(noteDiv) {
   let list = document.getElementById('notes');
   list.removeChild(noteDiv);
 }
 
-
-export function loadNotesFromLocalStorage() {
-  let list = document.getElementById('notes');
-  list.innerHTML = '';
-  let notes = JSON.parse(localStorage.getItem('notes'));
-  if (notes) {
-    notes.forEach(note => addNoteToList(note));
+function addNoteToLocalStorage(note) {
+  let notes = [];
+  if (localStorage.getItem('notes')) {
+    notes = JSON.parse(localStorage.getItem('notes'));
   }
+  notes.push(note);
+  localStorage.setItem('notes', JSON.stringify(notes));
 }
 
 function removeNoteFromLocalStorage(noteId) {
