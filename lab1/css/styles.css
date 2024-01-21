@@ -69,6 +69,11 @@ input, textarea {
     border: 2px solid #aaa;
     margin-bottom: 0.5rem;
     margin-top: 0.2rem;
+    width: 93%;
+}
+
+textarea {
+    height: 5rem;
 }
 
 label {
@@ -79,10 +84,13 @@ label {
     padding: 1rem;
     border: 2px solid #aaa;
     background-color: white;
-    max-width: 15rem;
-    box-shadow: 0 0 10px #ccc;
+    max-width: 20rem;
+    box-shadow: 0 0 30px #aaa;
     border-radius: 1rem;
     margin: 1rem;
+    position: fixed;
+    left: 8rem;
+    top: 3rem;
 }
 
 #create-post-container h2 {
@@ -90,10 +98,6 @@ label {
     margin-bottom: 0.5rem;
     padding: 0;
     text-align: center;
-}
-
-#add {
-    margin-left: 1rem;
 }
 
 #submit {
