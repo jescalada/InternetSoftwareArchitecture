@@ -10,5 +10,15 @@ export const user = {
   "lab1": {
     "PageTitle": "Lab 1 - Note Taking App",
     "Header": "Lab 1 - Note Taking App",
+    "Reader": "Reader",
+    "Writer": "Writer",
+    "LastUpdated": "Last Updated: ",
+    "CreateNote": "Create a Note",
+    "NoteTitle": "Note Title",
+    "NoteContent": "Note Content",
+    "Submit": "Submit",
+    "Back": "Back",
+    "Add": "Add",
+    "Remove": "Remove",
   }
 }
