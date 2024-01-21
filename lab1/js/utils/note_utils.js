@@ -58,6 +58,8 @@ function removeNoteFromList(noteDiv) {
 
 
 export function loadNotesFromLocalStorage() {
+  let list = document.getElementById('notes');
+  list.innerHTML = '';
   let notes = JSON.parse(localStorage.getItem('notes'));
   if (notes) {
     notes.forEach(note => addNoteToList(note));
