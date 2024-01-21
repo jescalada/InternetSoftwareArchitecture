@@ -19,11 +19,11 @@ function toggleCreateContainer() {
 }
 
 function setup() {
-  loadNotesFromLocalStorage();
   document.getElementById('submit').addEventListener('click', addNote.bind(this, hideCreateContainer));
   document.getElementById('add').addEventListener('click', toggleCreateContainer);
   hideCreateContainer();
-  setInterval(refresh, 2000);
+  refresh();
+  setInterval(refresh, 1000);
 }
 
 /**
@@ -31,6 +31,17 @@ function setup() {
  */
 function refresh() {
   loadNotesFromLocalStorage();
+  showLastUpdated();
+}
+
+/**
+ * Shows the last updated time in HH:MM:SS format.
+ */
+function showLastUpdated() {
+  let lastUpdated = document.getElementById('last-updated');
+  let date = new Date();
+  let time = date.toLocaleTimeString();
+  lastUpdated.textContent = `Last Updated: ${time}`;
 }
 
 setup();

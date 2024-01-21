@@ -1,8 +1,8 @@
 import { loadNotesFromLocalStorage } from './utils/note_utils.js';
 
 function setup() {
-  loadNotesFromLocalStorage();
-  setInterval(refresh, 2000);
+  refresh();
+  setInterval(refresh, 1000);
 }
 
 /**
@@ -10,6 +10,17 @@ function setup() {
  */
 function refresh() {
   loadNotesFromLocalStorage();
+  showLastUpdated();
+}
+
+/**
+ * Shows the last updated time in HH:MM:SS format.
+ */
+function showLastUpdated() {
+  let lastUpdated = document.getElementById('last-updated');
+  let date = new Date();
+  let time = date.toLocaleTimeString();
+  lastUpdated.textContent = `Last Updated: ${time}`;
 }
 
 setup();
