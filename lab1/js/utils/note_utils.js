@@ -1,4 +1,5 @@
 import { Note } from "./note.js";
+// import { user } from "../lang/messages/en/user.js";
 
 export function addNote(callback) {
   let title = document.getElementById('title').value;
@@ -41,7 +42,10 @@ function addNoteDetails(noteDiv, note) {
   content.textContent = note.content;
  
   let removeButton = document.createElement('button');
+  // Todo: Fix mimetype issue
+  // removeButton.textContent = user["lab1"]["Remove"];
   removeButton.textContent = "Remove";
+  
   removeButton.classList.add('remove');
   removeButton.addEventListener('click', removeNote.bind(this, noteDiv, note));
 
