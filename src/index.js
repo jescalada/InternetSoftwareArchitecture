@@ -18,6 +18,6 @@ http.createServer(function (req, res) {
         res.writeHead(404, {...headers, 'Content-Type': 'text/html'});
         res.end('Not found');
     }
-}).listen(3000);
+}).listen(443);
 
 console.log('Server running at http://localhost:3000/');
