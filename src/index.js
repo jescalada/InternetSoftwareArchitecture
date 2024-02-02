@@ -1,10 +1,23 @@
-// Develop a server side nodejs service to get your name you sent via the browser's address bar,  greet you and return the current time of the server ( entire message in blue)*
-
 const http = require('http');
 
-http.createServer(function (req, res) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.end('Hello <b>World!</b>');
-}).listen(8080);
+const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'OPTIONS, POST, GET, PUT, DELETE',
+    'Access-Control-Max-Age': 2592000, // 30 days
+    /** add other headers as per requirement */
+    'Content-Type': 'application/json'
+};
 
-console.log('Server running at http://localhost:8080/');
+// Add a new route for get request
+http.createServer(function (req, res) {
+    console.log(req.url);
+    if (req.url === '/name') {
+        res.writeHead(200, {...headers, 'Content-Type': 'text/html'});
+        res.end('Hello <b>Juan Escalada!</b>');
+    } else {
+        res.writeHead(404, {...headers, 'Content-Type': 'text/html'});
+        res.end('Not found');
+    }
+}).listen(3000);
+
+console.log('Server running at http://localhost:3000/');
