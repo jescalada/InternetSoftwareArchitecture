@@ -1,2 +1,2 @@
 const mo = require('./modules/math');
-console.log(mo.area(2));
+console.log(`Hello Juan Escalada. The area is ${mo.area(2)}`);
