@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body style="display: flex; width: 99vw; height: 80vh; background-color: bisque;">
+    <div id="Inputs" style="width: 60%; display: grid; margin: auto; padding-top: 5%;">
+        <h1 style="font-family: Arial, Helvetica, sans-serif; font-size: 4rem;"></h1>
+        <div style="padding-bottom: 10%;">
+            <input id="query" style="font-size: 2rem">
+            <button id="search"></button>
+        </div>
+        <textarea name="" id="definition" cols="30" rows="5" style="font-size: 2rem" disabled></textarea>
+        <p style="font-size: 3rem; font-family: Arial, Helvetica, sans-serif;"><span id="totalRequestsText"></span> <span id="request-number">0</span></p>
+    </div>
+</body>
+
+<script src="./scripts/search.js" type="module"></script>
+</html>
