@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <h1>THe XMLHttpRequest Object</h1>
+    <button type="button" onclick="requestSecret()">Request data</button>
+    <button type="button" onclick="requestBomb('http://apiz.ca/secrete')">kaboom</button>
+    <p id="secretResult"></p>
+  </div>
+</body>
+<script>
+  function requestSecret() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://apiz.ca/secrete', true);
+    const requestHeader = new Headers();
+    requestHeader.append('Content-Type', 'application/json');
+    // Bypass CORS error: Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'. The credentials mode of requests initiated by the XMLHttpRequest is controlled by the withCredentials attribute.
+    xhr.withCredentials = true;
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          document.getElementById('secretResult').textContent = xhr.responseText;
+        } else {
+          document.getElementById('secretResult').textContent = 'Error: ' + xhr.statusText;
+        }
+      }
+    };
+    xhr.send(JSON.stringify({ question: "What's the secret?"}));
+  }
+
+  function requestBomb(url) {
+    for (let i = 0; i < 100000; i++) {
+      requestSecret(url);
+    }
+  }
+</script>
+</html>
